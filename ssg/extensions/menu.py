@@ -1,12 +1,10 @@
-from pathlib import Path
 from ssg import hooks, parsers
-from pathlib import Path
 
 
 files = []
 
 @hooks.register("collect_files")
-def collect_files(source: Path, site_parsers):
+def collect_files(source, site_parsers):
     valid = lambda p: not isinstance(p, parsers.ResourceParser)
     for path in source.rglob("*"):
         for parser in list(filter(valid, site_parsers)):
